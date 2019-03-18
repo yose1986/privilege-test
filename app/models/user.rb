@@ -6,6 +6,6 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
 
-  has_one :role, :primary_key => 'role_id'
+  has_one :role, :foreign_key => 'role_id'
 
 end

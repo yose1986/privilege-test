@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20190318072540) do
 
   create_table "mainmenus", force: :cascade do |t|
     t.string "name"
+    t.string "display_name"
     t.string "access_lvl"
   end
 

@@ -18,3 +18,12 @@ users = User.create(
     {email:"supadmin@railstest.com", password:"supadmin", role_id: 1}
   ]
 )
+
+mainmenus = Mainmenu.create(
+  [
+    {name: "menuadmin", display_name: "Menu Admin", access_lvl: "1"},
+    {name: "useradmin", display_name: "User Admin", access_lvl: "1,2"},
+    {name: "regularmenu", display_name: "Regular Menu", access_lvl: "1,2,3"},
+    {name: "userprivate", display_name: "User Private", access_lvl: "1,3"}
+  ]
+)
