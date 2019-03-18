@@ -9,7 +9,11 @@
   </head>
 
   <body>
+    <a href="<%= root_url %>">Main Menu</a>
     <% if user_signed_in? %>
+      <% session[:filtered_menus].each do |menu| %>
+        <a href="<%= root_url %><%= menu["name"] %>"><%= menu["display_name"] %><a>
+      <% end %>
     <% end %>
     <%= yield %>
   </body>

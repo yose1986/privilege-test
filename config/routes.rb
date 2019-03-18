@@ -6,5 +6,8 @@ Rails.application.routes.draw do
   resources :mainmenus
 
   get 'menuadmin', action: :menuadmin, controller: "mainmenus"
+  get 'useradmin', action: :useradmin, controller: "mainmenus"
+  get 'regularmenu', action: :regularmenu, controller: "mainmenus"
+  get 'userprivate', action: :userprivate, controller: "mainmenus"
 
 end
