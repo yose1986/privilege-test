@@ -1,0 +1,7 @@
+<div>WELCOME</div>
+<% if user_signed_in? %>
+  <div><%= link_to "Sign Out", destroy_user_session_path, method: :delete  %></div>
+<% else %>
+  <div><a href="<%= new_user_session_path %>">Sign in</a></div>
+  <div><a href="<%= new_user_registration_path %>">Sign up</a></div>
+<% end %>
