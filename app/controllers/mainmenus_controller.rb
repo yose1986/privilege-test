@@ -1,5 +1,5 @@
 class MainmenusController < ApplicationController
-
+  before_action :check_access, except: :mainmenu
 
   def mainmenu
     if user_signed_in? && session[:filtered_menus].blank?
@@ -9,11 +9,7 @@ class MainmenusController < ApplicationController
   end
 
   def menuadmin
-    if user_signed_in?
-      menu = Mainmenu.new
-    else
-      redirect_to root_url
-    end
+
   end
 
   def useradmin
@@ -28,4 +24,17 @@ class MainmenusController < ApplicationController
 
   end
 
+  def is_method_allowed?(method, filtered_menus)
+    method_names = []
+    filtered_menus.each do |menu|
+      method_names << menu["name"]
+    end
+    return method_names.include?(method)
+  end
+
+  def check_access
+    unless user_signed_in? && !is_method_allowed?(__method__.to_s,session[:filtered_menus])
+      redirect_to root_url
+    end
+  end
 end
