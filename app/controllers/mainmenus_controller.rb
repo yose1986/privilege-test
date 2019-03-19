@@ -2,15 +2,13 @@ class MainmenusController < ApplicationController
   before_action :check_access, except: [:mainmenu, :edit, :update]
 
   def mainmenu
-    if user_signed_in?
-      mainmenus = Mainmenu.new
-      session[:filtered_menus] = mainmenus.get_filtered_menus(current_user)
-    end
+    get_filtered_menus
   end
 
   def menuadmin
     @mainmenus = Mainmenu.all
     @menu = Mainmenu.new
+    get_filtered_menus
   end
 
   def useradmin
@@ -31,6 +29,8 @@ class MainmenusController < ApplicationController
   def edit
     if user_signed_in? && current_user.role_id == 1
       @menu = Mainmenu.where(:id => params[:id]).first
+    else
+      redirect_to root_url
     end
   end
 
@@ -47,6 +47,8 @@ class MainmenusController < ApplicationController
       params["user"].present? ? access_lvl << params["user"] : ""
       menu.access_lvl = access_lvl.join(",")
       menu.save
+      redirect_to menuadmin_path
+    else
       redirect_to root_url
     end
   end
@@ -64,4 +66,12 @@ class MainmenusController < ApplicationController
       redirect_to root_url
     end
   end
+
+  def get_filtered_menus
+    if user_signed_in?
+      mainmenus = Mainmenu.new
+      session[:filtered_menus] = mainmenus.get_filtered_menus(current_user)
+    end
+  end
+
 end

@@ -6,27 +6,20 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-<style media="screen">
-  .center{
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-  }
-</style>
-
   </head>
 
   <body>
     <div class="center">
-    <a href="<%= root_url %>">Main Menu</a>
-    <% if user_signed_in? %>
-      <% session[:filtered_menus].each do |menu| %>
-        <a href="<%= root_url %><%= menu["name"] %>"><%= menu["display_name"] %><a>
-      <% end %>
-    <% end %>
+      <div style="margin:20px">
+        <a class="menu" href="<%= root_url %>">Main Menu</a>
+        <% if user_signed_in? %>
+          <% session[:filtered_menus].each do |menu| %>
+            <a class="menu" href="<%= root_url %><%= menu["name"] %>"><%= menu["display_name"] %><a>
+          <% end %>
+        <% end %>
+      </div>
     <%= yield %>
     </div>
+
   </body>
 </html>

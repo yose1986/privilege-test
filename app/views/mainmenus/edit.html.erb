@@ -1,20 +1,26 @@
 
 <%= form_for @menu, url: {action: "update"} do |f| %>
-<table border="1">
+<table class="menutable" border="1">
   <tr><td>Menu name: </td><td><%= f.label @menu.name %></td></tr>
   <tr><td>Display name: </td><td><%= f.label @menu.display_name %></td></tr>
   <tr>
     <td>Access Level: </td>
-    <td><%= f.label @menu.access_lvl %></td>
+    <% if @menu.access_lvl.present? %>
+      <td><%= f.label @menu.access_lvl %></td>
+    <% else%>
+      <td></td>
+    <% end %>
   </tr>
 </table>
-Edit menu access level
-<table border="1">
+</br>
+<h3>Edit menu access level</h3>
+<table class="menutable" border="1">
   <tr>
     <td><%= @menu.name != "menuadmin" ? check_box_tag(:superadmin,1, check_access_lvl(@menu.access_lvl, 1)) : "" %> Superadmin</td>
     <td><%= check_box_tag(:admin,2, check_access_lvl(@menu.access_lvl, 2)) %> Admin</td>
     <td><%= check_box_tag(:user,3, check_access_lvl(@menu.access_lvl, 3)) %> User</td>
   </tr>
 </table>
+</br>
   <%= f.submit %>
 <% end %>
