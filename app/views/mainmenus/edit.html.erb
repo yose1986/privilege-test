@@ -11,7 +11,7 @@
 Edit menu access level
 <table border="1">
   <tr>
-    <td><%= check_box_tag(:superadmin,1, check_access_lvl(@menu.access_lvl, 1)) %> Superadmin</td>
+    <td><%= @menu.name != "menuadmin" ? check_box_tag(:superadmin,1, check_access_lvl(@menu.access_lvl, 1)) : "" %> Superadmin</td>
     <td><%= check_box_tag(:admin,2, check_access_lvl(@menu.access_lvl, 2)) %> Admin</td>
     <td><%= check_box_tag(:user,3, check_access_lvl(@menu.access_lvl, 3)) %> User</td>
   </tr>

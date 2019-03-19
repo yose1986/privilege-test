@@ -14,15 +14,18 @@ class MainmenusController < ApplicationController
   end
 
   def useradmin
+  end
 
+  def adminonly
   end
 
   def regularmenu
-
   end
 
   def userprivate
+  end
 
+  def superadminuser
   end
 
   def edit
@@ -35,7 +38,11 @@ class MainmenusController < ApplicationController
     if user_signed_in? && current_user.role_id == 1
       access_lvl = []
       menu = Mainmenu.where(:id => params[:id]).first
-      params["superadmin"].present? ? access_lvl << params["superadmin"] : ""
+      if menu.name == "menuadmin"
+        access_lvl << "1"
+      else
+        params["superadmin"].present? ? access_lvl << params["superadmin"] : ""
+      end
       params["admin"].present? ? access_lvl << params["admin"] : ""
       params["user"].present? ? access_lvl << params["user"] : ""
       menu.access_lvl = access_lvl.join(",")

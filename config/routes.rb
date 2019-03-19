@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   get 'menuadmin', action: :menuadmin, controller: "mainmenus"
   get 'useradmin', action: :useradmin, controller: "mainmenus"
+  get 'adminonly', action: :adminonly, controller: "mainmenus"
   get 'regularmenu', action: :regularmenu, controller: "mainmenus"
   get 'userprivate', action: :userprivate, controller: "mainmenus"
+  get 'superadminuser', action: :superadminuser, controller: "mainmenus"
+
 
 end

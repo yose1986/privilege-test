@@ -1,4 +1,5 @@
 class Mainmenu < ApplicationRecord
+  validates :name, uniqueness: true
 
   def get_menu(name)
     menu = Mainmenu.find_by(name: name )
