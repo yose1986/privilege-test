@@ -1,0 +1,13 @@
+
+<%= form_for @menu, url: {action: "update"} do |f| %>
+<table border="1">
+  <tr><td>Menu name: </td><td><%= f.label @menu.name %></td></tr>
+  <tr><td>Display name: </td><td><%= f.label @menu.display_name %></td></tr>
+  <tr>
+    <td>Access Level: </td>
+    <%= hidden_field_tag(:access_lvl, @menu.access_lvl) %>
+    <td><%= f.label @menu.access_lvl %></td>
+  </tr>
+</table>
+  <%= f.submit %>
+<% end %>

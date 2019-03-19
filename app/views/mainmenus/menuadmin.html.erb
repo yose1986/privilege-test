@@ -1,1 +1,15 @@
-menuadmin
+<h2>Menu Admin</h2>
+<div>
+  Menu list
+  <table border=1>
+    <% @mainmenus.each do |m| %>
+    <tr>
+      <td><%= m.name %></td>
+      <td><%= m.display_name %></td>
+      <td><%= m.access_lvl %></td>
+      <td><a href="<%= edit_mainmenu_path(m.id) %>">Edit Menu</a></td>
+    </tr>
+    <% end %>
+  </table>
+
+</div>
