@@ -2,7 +2,7 @@ class MainmenusController < ApplicationController
   before_action :check_access, except: [:mainmenu, :edit, :update]
 
   def mainmenu
-    if user_signed_in? && session[:filtered_menus].blank?
+    if user_signed_in?
       mainmenus = Mainmenu.new
       session[:filtered_menus] = mainmenus.get_filtered_menus(current_user)
     end
@@ -32,9 +32,16 @@ class MainmenusController < ApplicationController
   end
 
   def update
-    puts "-------------------------------------"
-    puts params.inspect()
-    puts "-------------------------------------"
+    if user_signed_in? && current_user.role_id == 1
+      access_lvl = []
+      menu = Mainmenu.where(:id => params[:id]).first
+      params["superadmin"].present? ? access_lvl << params["superadmin"] : ""
+      params["admin"].present? ? access_lvl << params["admin"] : ""
+      params["user"].present? ? access_lvl << params["user"] : ""
+      menu.access_lvl = access_lvl.join(",")
+      menu.save
+      redirect_to root_url
+    end
   end
 
   def is_method_allowed?(method, filtered_menus)
